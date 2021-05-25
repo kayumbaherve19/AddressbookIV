@@ -1,22 +1,40 @@
 public class Contacts {
 
-    private String Name;
+    private String FirstName;
+    private String LastName;
+    private String Address
     private String contactNumber;
   
     
-    public Contacts(String Name, String contactNumber) {
-        this.Name = Name;
+    public Contacts(String FirstName,String LastName, String Address, String contactNumber) {
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.Address = Address;
         this.contactNumber = contactNumber;
     }
   
-        public String getName() {
-        return Name;
+        public String getFirstName() {
+        return FirstName;
     }
   
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setFirstName(String FirstName) {
+        this.FirstName = FirstName;
     }
   
+    public String getLastName() {
+        return LastName;
+    }
+  
+    public void setLastName(String LastName) {
+        this.LastName = LastName;
+    }
+      public String getAddress() {
+        return Address;
+    }
+  
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
     public String getContactNumber() {
         return contactNumber;
     }
@@ -75,7 +93,7 @@ class ContactRVAdapter extends RecyclerView.Adapter<ContactRVAdapter.ViewHolder>
        
         Contacts modal = contactsArrayList.get(position);
         
-        holder.contactTV.setText(modal.getName());
+        holder.contactTV.setText(modal.getFirstName());
         ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
         
         int color = generator.getRandomColor();
@@ -84,14 +102,16 @@ class ContactRVAdapter extends RecyclerView.Adapter<ContactRVAdapter.ViewHolder>
                 .width(100)  // width in px
                 .height(100) // height in px
                 .endConfig()
-                .buildRound(modal.getName().substring(0, 1), color);
+                .buildRound(modal.getFirstName().substring(0, 1), color);
         holder.contactIV.setImageDrawable(drawable2);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, ContactDetailActivity.class);
-                i.putExtra("name", modal.getName());
-                i.putExtra("contact", modal.getContactNumber());
+                i.putExtra("Firstname", modal.getFirstName());
+                i.putExtra("Lastname", modal.getLastName());
+                i.putExtra("Address", modal.getAddress());
+                i.putExtra("Phone", modal.getContactNumber());
                                context.startActivity(i);
             }
         });
